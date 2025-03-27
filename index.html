@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random YouTube Video</title>
+</head>
+<body>
+    <h1>Video Acak dari YouTube</h1>
+    {% if video_title %}
+        <h2>{{ video_title }}</h2>
+        <a href="{{ video_url }}" target="_blank">Tonton Video</a>
+    {% else %}
+        <p>Tidak ada video yang ditemukan.</p>
+    {% endif %}
+    <br>
+    <button onclick="window.location.reload();">Tampilkan Video Acak Lain</button>
+</body>
+</html>
