@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random YouTube Video</title>
+    <style>
+        body {
+            background-color: #f0f0f0; 
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh; 
+            margin: 0; 
+        }
+        h1 {
+            color: #333; 
+            text-align: center; 
+        }
+        .video-container {
+            margin: 20px 0; 
+        }
+        iframe {
+            width: 1234px; 
+            height: 700px; 
+            border: none; 
+        }
+        button {
+            padding: 10px 20px; 
+            font-size: 16px; 
+            color: white; 
+            background-color: #007bff; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+        }
+        button:hover {
+            background-color: #0056b3; 
+        }
+        .category-form {
+            margin: 20px 0;
+            text-align: center;
+        }
+        select, button {
+            padding: 8px;
+            margin: 5px;
+            border-radius: 4px;
+        }
+        .filter-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .filter-box {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Random YouTube Video</h1>
+    
+    <!-- Filter Form -->
+    <form method="POST">
+        <div class="filter-container">
+            <div class="filter-box">
+                <label>Category:</label>
+                <select name="category">
+                    <option value="">All</option>
+                    {% for key, name in categories.items() %}
+                        <option value="{{ key }}">{{ name|title }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="filter-box">
+                <label>Duration:</label>
+                <select name="duration">
+                    <option value="">Any</option>
+                    {% for key, name in durations.items() %}
+                        <option value="{{ key }}">{{ name|title }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <button type="submit">Generate Random Video</button>
+    </form>
+
+    <!-- Video Player -->
+    <div class="video-container">
+        {% if video_id %}
+            <iframe 
+                src="https://www.youtube.com/embed/{{ video_id }}" 
+                allowfullscreen>
+            </iframe>
+        {% else %}
+            <p>No video found. Try different filters!</p>
+        {% endif %}
+    </div>
+</body>
+</html>
